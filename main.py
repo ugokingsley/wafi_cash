@@ -1,5 +1,5 @@
 class WafiAccount:
-    """simple account balance of bank"""
+    """ Wafi-Cash peer to peer payment app"""
     def __init__ (self, account_name, account_balance):
         self.account_name = account_name
         self.account_balance = account_balance
@@ -22,7 +22,7 @@ class WafiAccount:
 
     # Check  Wafi-Cash Account Balance
     def account_statement(self):
-        print("Hello {} Your  Wafi-Cash Account Balance is {}".format(self.account_name, self.account_balance))
+        return self.account_balance
 
     # Funds Transfer from  Wafi-Cash Account
     def transfer(self, amount, account_name):
