@@ -11,7 +11,6 @@ class WafiAccount:
     def __init__(self, account_name, account_balance={"USD": 20, "NGN" : 20, "GBP":20, "YUAN": 20}):
         self.account_name = account_name
         self.account_balance=account_balance
-        #self.account_balance = {"USD": 20, "NGN" : 20, "GBP":20, "YUAN": 20}
         print('Wafi-Cash Account for customer, ' + self.account_name)
     
     # Deposit to Wafi-Cash Account
@@ -34,7 +33,7 @@ class WafiAccount:
         return self.account_balance
 
     def currency_conversion(self, currency, other_currency, amount):
-        rate = { "USD": 1, "NGN" : 415, GBP:0.86, "YUAN" : 6.89}
+        rate = { "USD": 1, "NGN" : 415, "GBP":0.86, "YUAN" : 6.89}
         if currency == "USD":
             amount = amount/rate[other_currency]
         elif currency == "GBP":
