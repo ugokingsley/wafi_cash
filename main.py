@@ -1,4 +1,4 @@
-import toolz
+
 
 class WafiAccount:
     """ Wafi-Cash peer to peer payment app"""
@@ -39,7 +39,7 @@ class WafiAccount:
             amount = amount/rate[other_currency]
         elif currency == "GBP":
             amount =(amount/rate[other_currency])*rate["GBP"]
-        else currency == "YUAN":
+        elif currency == "YUAN":
             amount = (amount/rate[other_currency])*rate["YUAN"]
         return amount
 
@@ -52,7 +52,7 @@ class WafiAccount:
             account_name.account_balance[currency] = account_name.account_balance[currency] + amount
             print("Hello, you transferred: {}".format(amount))
 
-        elif sum(self.account_balance.values()) > total
+        elif sum(self.account_balance.values()) > total:
             self.account_balance[currency] = self.account_balance[currency] - total
             account_name.account_balance[currency] = account_name.account_balance[currency] + total
             print("Hello, you transferred: {}".format(amount))
