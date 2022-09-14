@@ -1,12 +1,21 @@
+import toolz
+
 class WafiAccount:
     """ Wafi-Cash peer to peer payment app"""
+    '''
     def __init__ (self, account_name, account_balance):
         self.account_name = account_name
         self.account_balance = account_balance
         print('Wafi-Cash Account for customer, ' + self.account_name)
+    '''
 
+    def __init__(self, account_name, account_balance):
+        self.account_name = account_name
+        self.account_balance = {"USD": 0, "NGN" : 0, "GBP":0, "YUAN": 0}
+        print('Wafi-Cash Account for customer, ' + self.account_name)
+    
     # Deposit to Wafi-Cash Account
-    def deposit(self, amount):
+    def deposit(self, currency, amount):
         if amount > 0:
             self.account_balance += amount
             self.account_statement()
@@ -24,8 +33,29 @@ class WafiAccount:
     def account_statement(self):
         return self.account_balance
 
+    def currency_conversion(self, currency, other_currency, amount):
+        rate = { "USD": 1, "NGN" : 415, GBP:0.86, "YUAN" : 6.89}
+        if currency == "USD":
+            amount = amount/rate[other_currency]
+        elif currency == "GBP":
+            amount =(amount/rate[other_currency])*rate["GBP"]
+        else currency == "YUAN":
+            amount = (amount/rate[other_currency])*rate["YUAN"]
+        return amount
+
     # Funds Transfer from  Wafi-Cash Account
-    def transfer(self, amount, account_name):
-        self.account_balance = self.account_balance - amount
-        account_name.account_balance = account_name.account_balance + amount
-        print("Hello, you transferred: {}".format(amount))
+    def transfer(self, currency, amount, account_name):
+        convert = self.account_balance.currency_conversion(self.account_balance[currency],self.account_name.account_balance[currency], amount)
+        total = sum(convert.values())
+        if self.account_balance[currency] > amount:
+            self.account_balance[currency] = self.account_balance[currency] - amount
+            account_name.account_balance[currency] = account_name.account_balance[currency] + amount
+            print("Hello, you transferred: {}".format(amount))
+
+        elif sum(self.account_balance.values()) > total
+            self.account_balance[currency] = self.account_balance[currency] - total
+            account_name.account_balance[currency] = account_name.account_balance[currency] + total
+            print("Hello, you transferred: {}".format(amount))
+
+        else:
+            print("Insufficient Amount !")
