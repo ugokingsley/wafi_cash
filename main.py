@@ -1,5 +1,4 @@
 
-
 class WafiAccount:
     """ Wafi-Cash peer to peer payment app"""
     '''
@@ -9,9 +8,10 @@ class WafiAccount:
         print('Wafi-Cash Account for customer, ' + self.account_name)
     '''
 
-    def __init__(self, account_name, account_balance):
+    def __init__(self, account_name, account_balance={"USD": 20, "NGN" : 20, "GBP":20, "YUAN": 20}):
         self.account_name = account_name
-        self.account_balance = {"USD": 0, "NGN" : 0, "GBP":0, "YUAN": 0}
+        self.account_balance=account_balance
+        #self.account_balance = {"USD": 20, "NGN" : 20, "GBP":20, "YUAN": 20}
         print('Wafi-Cash Account for customer, ' + self.account_name)
     
     # Deposit to Wafi-Cash Account
@@ -45,17 +45,9 @@ class WafiAccount:
 
     # Funds Transfer from  Wafi-Cash Account
     def transfer(self, currency, amount, account_name):
-        convert = self.account_balance.currency_conversion(self.account_balance[currency],self.account_name.account_balance[currency], amount)
-        total = sum(convert.values())
+
         if self.account_balance[currency] > amount:
             self.account_balance[currency] = self.account_balance[currency] - amount
             account_name.account_balance[currency] = account_name.account_balance[currency] + amount
             print("Hello, you transferred: {}".format(amount))
-
-        elif sum(self.account_balance.values()) > total:
-            self.account_balance[currency] = self.account_balance[currency] - total
-            account_name.account_balance[currency] = account_name.account_balance[currency] + total
-            print("Hello, you transferred: {}".format(amount))
-
-        else:
-            print("Insufficient Amount !")
+        
